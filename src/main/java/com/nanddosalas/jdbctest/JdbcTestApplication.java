@@ -43,5 +43,10 @@ public class JdbcTestApplication {
 		repository.insert(user1);
 
 		System.out.println("\nUsers count: " + repository.count());
+
+		System.out.println("\ndelete user with id 5");
+		System.out.println("\nrows affected " + repository.delete(5));
+		System.out.println("\nUsers count: " + repository.count());
+
 	}
 }

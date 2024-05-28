@@ -80,4 +80,10 @@ public class UserRepository {
                 user.getRole(),
                 user.getPassword());
     }
+
+    public int delete(int userId) {
+        String sql = "delete from users where id = ?;";
+
+        return template.update(sql, 5);
+    }
 }
