@@ -24,7 +24,8 @@ public class UserRepository {
     }
 
     @Autowired
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public void setNamedParameterJdbcTemplate(
+            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -69,16 +70,11 @@ public class UserRepository {
     }
 
     public int insert(User user) {
-        String sql = "insert into users (full_name, email, avatar, about, server_role, encrypted_password) values (?, ?, ?, ?, ?, ?);";
+        String sql =
+                "insert into users (full_name, email, avatar, about, server_role, encrypted_password) values (?, ?, ?, ?, ?, ?);";
 
-        return template.update(
-                sql,
-                user.getFullName(),
-                user.getEmail(),
-                user.getAvatar(),
-                user.getAbout(),
-                user.getRole(),
-                user.getPassword());
+        return template.update(sql, user.getFullName(), user.getEmail(), user.getAvatar(),
+                user.getAbout(), user.getRole(), user.getPassword());
     }
 
     public int delete(int userId) {
