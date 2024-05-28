@@ -1,10 +1,15 @@
 package com.nanddosalas.jdbctest.repositories;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import com.nanddosalas.jdbctest.models.User;
 import com.nanddosalas.jdbctest.repositories.mappers.UserMapper;
 
 @Repository
@@ -39,6 +44,22 @@ public class UserRepository {
     @Autowired
     public void setMapper(UserMapper mapper) {
         this.mapper = mapper;
+    }
+
+    public List<User> findAll() {
+        String sql = "select * from users;";
+
+        List<User> users = template.query(sql, mapper);
+
+        return users;
+    }
+
+    public User findById(int userId) {
+        String sql = "select * from users where id = :id;";
+
+        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", userId);
+
+        return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, mapper);
     }
 
 }
