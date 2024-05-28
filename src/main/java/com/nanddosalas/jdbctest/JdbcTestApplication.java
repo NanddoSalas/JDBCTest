@@ -26,5 +26,7 @@ public class JdbcTestApplication {
 
 		System.out.println("\nretrieve user by id 4\n");
 		System.out.println(repository.findById(4));
+
+		System.out.println("\nUsers count: " + repository.count());
 	}
 }

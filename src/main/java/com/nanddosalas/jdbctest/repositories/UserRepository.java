@@ -62,4 +62,10 @@ public class UserRepository {
         return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, mapper);
     }
 
+    public int count() {
+        String sql = "select count(*) from users;";
+
+        return template.queryForObject(sql, Integer.class);
+    }
+
 }
