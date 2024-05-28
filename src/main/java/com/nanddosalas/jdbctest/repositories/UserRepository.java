@@ -68,4 +68,16 @@ public class UserRepository {
         return template.queryForObject(sql, Integer.class);
     }
 
+    public int insert(User user) {
+        String sql = "insert into users (full_name, email, avatar, about, server_role, encrypted_password) values (?, ?, ?, ?, ?, ?);";
+
+        return template.update(
+                sql,
+                user.getFullName(),
+                user.getEmail(),
+                user.getAvatar(),
+                user.getAbout(),
+                user.getRole(),
+                user.getPassword());
+    }
 }
