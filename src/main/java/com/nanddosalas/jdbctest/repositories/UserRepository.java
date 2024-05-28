@@ -82,4 +82,12 @@ public class UserRepository {
 
         return template.update(sql, 5);
     }
+
+    public int update(User user) {
+        String sql =
+                "update users set full_name = ?, email = ?, avatar = ?, about = ?, server_role = ?, encrypted_password = ? where id = ?;";
+
+        return template.update(sql, user.getFullName(), user.getEmail(), user.getAvatar(),
+                user.getAbout(), user.getRole(), user.getPassword(), user.getId());
+    }
 }

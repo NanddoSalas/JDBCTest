@@ -48,5 +48,22 @@ public class JdbcTestApplication {
 		System.out.println("\nrows affected " + repository.delete(5));
 		System.out.println("\nUsers count: " + repository.count());
 
+		System.out.println("\nretrieve user by id 3\n");
+		User user3 = repository.findById(3);
+		System.out.println(user3);
+
+		user3.setFullName("Luis Cano");
+		user3.setPassword("BetterPassword");
+		user3.setAvatar("");
+		user3.setEmail("f3rn4ndd0@gmail.com");
+		user3.setAbout("Hi there my name is Luis!");
+		user3.setRole("ServerAdmin");
+
+
+		System.out.println("\nupdate user with id 3");
+		System.out.println("\nrows affected " + repository.update(user3));
+		System.out.println("\nretrieve updated user\n");
+		System.out.println(repository.findById(3));
+
 	}
 }
