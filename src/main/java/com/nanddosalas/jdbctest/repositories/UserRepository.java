@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.nanddosalas.jdbctest.models.User;
@@ -56,11 +54,13 @@ public class UserRepository {
     }
 
     public User findById(int userId) {
-        String sql = "select * from users where id = :id;";
+        // alternative method
+        // String sql = "select * from users where id = :id;";
+        // SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", userId);
+        // return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, mapper);
+        String sql = "select * from users where id = ?;";
 
-        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", userId);
-
-        return namedParameterJdbcTemplate.queryForObject(sql, namedParameters, mapper);
+        return template.queryForObject(sql, mapper, userId);
     }
 
     public int count() {
