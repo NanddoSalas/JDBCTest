@@ -2,47 +2,25 @@ package com.nanddosalas.jdbctest.repositories;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.nanddosalas.jdbctest.models.User;
 import com.nanddosalas.jdbctest.repositories.mappers.UserMapper;
 
+import lombok.Data;
+
 @Repository
+@Data
 public class UserRepository {
 
-    private JdbcTemplate template;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private UserMapper mapper;
+    private JdbcTemplate template;
+    // private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
-        return namedParameterJdbcTemplate;
-    }
-
-    @Autowired
-    public void setNamedParameterJdbcTemplate(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
-
-    public JdbcTemplate getTemplate() {
-        return template;
-    }
-
-    @Autowired
-    public void setTemplate(JdbcTemplate template) {
-        this.template = template;
-    }
-
-    public UserMapper getMapper() {
-        return mapper;
-    }
-
-    @Autowired
-    public void setMapper(UserMapper mapper) {
+    public UserRepository(UserMapper mapper, JdbcTemplate template) {
         this.mapper = mapper;
+        this.template = template;
     }
 
     public List<User> findAll() {
